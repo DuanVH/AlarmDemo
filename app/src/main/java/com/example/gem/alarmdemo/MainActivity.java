@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.EthiopicCalendar;
 import android.nfc.Tag;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -34,13 +35,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
 
+//        Intent intent = new Intent(this, AlarmService.class);
+//        startService(intent);
+
 //        for (int i = 0; i < mAlarms.size(); i++) {
 ////            SystemClock.sleep(mAlarms.get(i).getTime());
 //            final long time = mAlarms.get(i).getTime();
 //            new Handler().postDelayed(new Runnable() {
 //                @Override
 //                public void run() {
-//                    SystemClock.sleep(time);
+//
 //                }
 //            }, mAlarms.get(i).getTime());
 //            postNotification(mAlarms.get(i).getId() + "", mAlarms.get(i).getContent() + "");
@@ -50,9 +54,11 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         mRvListAlarm = findViewById(R.id.rv_alarm);
         addListAlarm();
+
+
     }
 
-    private void postNotification(String contentTitle, String contentText) {
+    public void postNotification(String contentTitle, String contentText) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.mipmap.ic_launcher_round)

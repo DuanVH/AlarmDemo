@@ -18,6 +18,13 @@
         </activity>
 
         <activity android:name=".ResultActivity" />
+
+        <service android:name=".AlarmService" />
+
+        <receiver android:name=".TimeChangeReceiver" >
+
+        </receiver>
+
     </application>
 
 </manifest>
