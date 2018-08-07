@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     initViews();
 
 //    NotificationHelper.postNotify(getApplicationContext(), "10", "40");
-    AlarmUtils.addAlarm(getApplicationContext(), new Intent(getApplicationContext(), AlarmNotificationReceiver.class), 1, "14", "24");
-    AlarmUtils.addAlarm(getApplicationContext(), new Intent(getApplicationContext(), AlarmNotificationReceiver.class), 2, "14", "27");
+    AlarmUtils.addAlarm(getApplicationContext(), 1, "8", "8", "01", "22");
+    AlarmUtils.addAlarm(getApplicationContext(), 2, "8", "8", "01", "24");
 
 //    NotificationHelper.enableReboot(getApplicationContext());
   }
