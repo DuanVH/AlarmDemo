@@ -23,6 +23,7 @@ public class AlarmNotificationRebootReceiver extends BroadcastReceiver {
 
   @Override
   public void onReceive(Context context, Intent intent) {
+    Log.i("REBOOT_COMPLETED", "reboot - " + intent.getAction());
     Toast.makeText(context, "re boot xxx", Toast.LENGTH_SHORT).show();
     if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
       writeFile();

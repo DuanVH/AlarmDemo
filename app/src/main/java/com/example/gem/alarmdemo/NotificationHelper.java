@@ -1,5 +1,6 @@
 package com.example.gem.alarmdemo;
 
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -8,6 +9,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -24,6 +26,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class NotificationHelper {
 
   private static final String TAG = NotificationHelper.class.getName();
+
   private static AlarmManager alarmManager;
   private static PendingIntent pendingIntent;
 
@@ -31,7 +34,6 @@ public class NotificationHelper {
   private static PendingIntent pendingIntentReboot;
 
   private static final String CHANNEL_ID = "CHANNEL_ID";
-
 
   public static void postNotify(Context context) {
     NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID);
@@ -63,10 +65,6 @@ public class NotificationHelper {
     Log.e(TAG, "postNotify: " + SystemClock.elapsedRealtime() );
   }
 
-  public static void test() {
-    Log.e(TAG, "test: " + SystemClock.elapsedRealtime() );;
-  }
-
   public static void postNotifyReboot(Context context, String h, String m) {
     alarmManagerReboot = (AlarmManager) context.getSystemService(ALARM_SERVICE);
     Intent intent = new Intent(context, AlarmNotificationReceiver.class);
@@ -89,7 +87,7 @@ public class NotificationHelper {
 
     alarmManagerReboot = (AlarmManager)context.getSystemService(ALARM_SERVICE);
 
-    alarmManagerReboot.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
+    alarmManagerReboot.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
         SystemClock.elapsedRealtime(),
         AlarmManager.INTERVAL_DAY, pendingIntentReboot);
   }
