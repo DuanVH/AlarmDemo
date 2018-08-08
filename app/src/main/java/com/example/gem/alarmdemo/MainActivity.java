@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
   private List<ItemAlarm> mAlarms;
   private AlarmAdapter mAdapter;
 
+  private TextView tvTime;
 
   private final String fileName = "note1.txt";
 
@@ -48,16 +50,23 @@ public class MainActivity extends AppCompatActivity {
     initViews();
 
 //    NotificationHelper.postNotify(getApplicationContext(), "10", "40");
-    AlarmUtils.addAlarm(getApplicationContext(), new Intent(getApplicationContext(), AlarmNotificationReceiver.class), 1, "14", "24");
-    AlarmUtils.addAlarm(getApplicationContext(), new Intent(getApplicationContext(), AlarmNotificationReceiver.class), 2, "14", "27");
+//    AlarmUtils.addAlarm(getApplicationContext(), new Intent(getApplicationContext(), AlarmNotificationReceiver.class), 1, "14", "32");
+//    AlarmUtils.addAlarm(getApplicationContext(), new Intent(getApplicationContext(), AlarmNotificationReceiver.class), 2, "14", "34");
+    AlarmUtils.addAlarm(getApplicationContext(), new Intent(getApplicationContext(), AlarmNotificationReceiver.class), 1, 1533719580);
 
 //    NotificationHelper.enableReboot(getApplicationContext());
   }
 
   private void initViews() {
+    tvTime = (TextView) findViewById(R.id.tv_time_convert);
     mRvListAlarm = findViewById(R.id.rv_alarm);
     addListAlarm();
 //    writeFile();
+
+    long date = 1533632400000l - 900000;
+//    Log.e(TAG, "initViews: " + DateTimeUtils.getDateString(date));
+//    Log.e(TAG, "initViews: " + DateTimeUtils.getDateTimeString(date));
+    Log.e(TAG, "initViews: " + DateTimeUtils.getTimeString(date));
   }
 
   private void writeFile() {

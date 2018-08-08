@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 
 import org.json.JSONArray;
 
@@ -56,6 +57,29 @@ public class AlarmUtils {
       alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     } else {
       alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    saveAlarmId(context, notificationId);
+  }
+
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+  public static void addAlarm(Context context, Intent intent, int notificationId, long timeMillions) {
+
+    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+//    Calendar calendar = Calendar.getInstance();
+//    calendar.setTimeInMillis(System.currentTimeMillis());
+//    calendar.setTimeInMillis(timeMillions);
+    alarmManager.setTime(timeMillions);
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmManager.getNextAlarmClock().getTriggerTime(), pendingIntent);
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmManager.getNextAlarmClock().getTriggerTime(), pendingIntent);
+    } else {
+      alarmManager.set(AlarmManager.RTC_WAKEUP, alarmManager.getNextAlarmClock().getTriggerTime(), pendingIntent);
     }
 
     saveAlarmId(context, notificationId);

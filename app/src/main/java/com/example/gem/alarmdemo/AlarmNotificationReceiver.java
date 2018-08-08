@@ -33,5 +33,4 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
     notificationManager.notify(0, builder.build());
   }
 
-
 }
